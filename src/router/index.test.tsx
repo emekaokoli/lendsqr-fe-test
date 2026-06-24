@@ -7,8 +7,13 @@ vi.mock('@/features/auth/LoginPage', () => ({
   default: () => <div data-testid="login-page">Login</div>,
 }));
 
+let throwComponentError = false;
+
 vi.mock('@/features/users/UsersPage', () => ({
-  default: () => <div data-testid="users-page">Users</div>,
+  default: () => {
+    if (throwComponentError) throw new Error('Component error');
+    return <div data-testid="users-page">Users</div>;
+  },
 }));
 
 vi.mock('@/features/users/UserDetailPage', () => ({
@@ -36,6 +41,7 @@ vi.mock('@/components/ui/EmptyState', () => ({
 }));
 
 beforeEach(() => {
+  throwComponentError = false;
   window.history.pushState({}, '', '/');
   useAuthStore.setState({ isAuthenticated: false, user: null });
   getUsers();
@@ -101,5 +107,40 @@ describe('router', () => {
     await waitFor(() => {
       expect(screen.getByText('User not found')).toBeInTheDocument();
     });
+  });
+
+  it('redirects authenticated users from login to users', async () => {
+    window.history.pushState({}, '', '/login');
+    useAuthStore.setState({ isAuthenticated: true, user: { email: 'test@test.com' } });
+    const { RouterProvider } = await import('@tanstack/react-router');
+    const { router } = await import('./index');
+
+    render(<RouterProvider router={router} />);
+
+    expect(await screen.findByTestId('users-page')).toBeInTheDocument();
+  });
+
+  it('shows user detail page for valid user', async () => {
+    window.history.pushState({}, '', '/users/usr_0001');
+    useAuthStore.setState({ isAuthenticated: true, user: { email: 'test@test.com' } });
+    const { RouterProvider } = await import('@tanstack/react-router');
+    const { router } = await import('./index');
+
+    render(<RouterProvider router={router} />);
+
+    expect(await screen.findByTestId('user-detail-page')).toBeInTheDocument();
+  });
+
+  it('shows default error component when route throws', async () => {
+    throwComponentError = true;
+    window.history.pushState({}, '', '/users');
+    useAuthStore.setState({ isAuthenticated: true, user: { email: 'test@test.com' } });
+    const { RouterProvider } = await import('@tanstack/react-router');
+    const { router } = await import('./index');
+
+    render(<RouterProvider router={router} />);
+
+    expect(await screen.findByTestId('error-state')).toBeInTheDocument();
+    expect(screen.getByText('Component error')).toBeInTheDocument();
   });
 });

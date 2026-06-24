@@ -8,11 +8,12 @@ Object.defineProperty(window, 'location', {
   writable: true,
 });
 
-let simulateError = false;
+let errorType: 'none' | 'error' | 'string' = 'none';
 
 vi.mock('@tanstack/react-router', () => ({
   RouterProvider: () => {
-    if (simulateError) throw new Error('Test error');
+    if (errorType === 'error') throw new Error('Test error');
+    if (errorType === 'string') throw 'String error';
     return <div data-testid="router-provider">Router</div>;
   },
 }));
@@ -25,7 +26,7 @@ vi.mock('@/styles/main.scss', () => ({}));
 
 describe('App', () => {
   beforeEach(() => {
-    simulateError = false;
+    errorType = 'none';
     vi.clearAllMocks();
   });
 
@@ -40,14 +41,20 @@ describe('App', () => {
   });
 
   it('renders error boundary fallback on error', async () => {
-    simulateError = true;
+    errorType = 'error';
     render(<App />);
     expect(screen.getByText('Test error')).toBeInTheDocument();
     expect(screen.getByText('Try again')).toBeInTheDocument();
   });
 
+  it('renders fallback with default message for non-Error', () => {
+    errorType = 'string';
+    render(<App />);
+    expect(screen.getByText('An unexpected error occurred.')).toBeInTheDocument();
+  });
+
   it('reloads page on retry', async () => {
-    simulateError = true;
+    errorType = 'error';
     render(<App />);
     fireEvent.click(screen.getByText('Try again'));
     expect(mockReload).toHaveBeenCalled();
