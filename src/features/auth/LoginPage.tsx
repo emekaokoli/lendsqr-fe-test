@@ -1,3 +1,4 @@
+import Logo from '@/assets/logo.svg?react';
 import LoginICon from '@/assets/pablo-sign-in.svg?react';
 import { useAuthStore } from '@/store/authStore';
 import { useNavigate } from '@tanstack/react-router';
@@ -30,11 +31,7 @@ export default function LoginPage() {
     <div className={styles.page}>
       <div className={styles.left}>
         <div className={styles.logoArea}>
-          <svg width="145" height="30" viewBox="0 0 170 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="36" height="36" rx="8" fill="#213F7D"/>
-            <path d="M18 9L10 18l8 9 8-9-8-9z" fill="#39CDCC"/>
-            <text x="44" y="26" fontFamily="Work Sans, sans-serif" fontWeight="700" fontSize="22" fill="#213F7D">lendsqr</text>
-          </svg>
+          <Logo />
         </div>
         <div className={styles.illustration}>
           <LoginICon />
