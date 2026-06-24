@@ -1,0 +1,43 @@
+@use '@/styles/variables' as *;
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.body {
+  display: flex;
+  flex: 1;
+  position: relative;
+}
+
+.main {
+  flex: 1;
+  padding: 40px 48px;
+  padding-top: calc(#{$header-height} + 40px);
+  background: $bg;
+  min-width: 0;
+  margin-left: $sidebar-width;
+
+  @media (max-width: $tablet) {
+    margin-left: 0;
+    padding: calc(72px + 24px) 20px 24px;
+  }
+
+  @media (max-width: $mobile) {
+    padding: calc(72px + 20px) 16px 20px;
+  }
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 49;
+  display: none;
+
+  @media (max-width: $tablet) {
+    display: block;
+  }
+}

@@ -1,0 +1,156 @@
+@use '@/styles/variables' as *;
+
+.page {
+  // padding handled by DashboardLayout main
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 500;
+  color: $primary;
+  margin-bottom: 40px;
+
+  @media (max-width: $mobile) {
+    font-size: 20px;
+    margin-bottom: 24px;
+  }
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 26px;
+  margin-bottom: 40px;
+
+  @media (max-width: $tablet) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  @media (max-width: $mobile) {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+}
+
+.statsError {
+  font-size: 14px;
+  color: $status-blacklisted-text;
+  grid-column: 1 / -1;
+}
+
+.tableCard {
+  background: $white;
+  border-radius: $radius;
+  box-shadow: $shadow-card;
+  overflow: hidden;
+}
+
+.tableWrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  min-width: 600px;
+
+  @media (max-width: $mobile-sm) {
+    min-width: 480px;
+    font-size: 12px;
+  }
+}
+
+.th {
+  padding: 14px 16px;
+  text-align: left;
+  border-bottom: 1px solid $border-light;
+  background: $white;
+  white-space: nowrap;
+
+  @media (max-width: $tablet) {
+    padding: 12px;
+  }
+
+  @media (max-width: $mobile) {
+    padding: 10px;
+    font-size: 11px;
+  }
+}
+
+.filterHeader {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: $text;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+
+  &:hover { color: $primary; }
+}
+
+.tr {
+  cursor: pointer;
+  transition: background 0.1s;
+
+  &:hover { background: rgba(33,63,125,0.02); }
+  &:not(:last-child) { border-bottom: 1px solid $border-light; }
+}
+
+.td {
+  padding: 16px;
+  color: $text;
+  white-space: nowrap;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  @media (max-width: $tablet) {
+    padding: 12px;
+    max-width: 140px;
+  }
+
+  @media (max-width: $mobile) {
+    padding: 10px;
+    max-width: 100px;
+    font-size: 12px;
+  }
+}
+
+.dotsBtn {
+  color: $text;
+  display: flex;
+  align-items: center;
+  padding: 6px;
+  border-radius: 4px;
+
+  &:hover { background: $border-light; }
+}
+
+.actionMenu {
+  display: flex;
+  flex-direction: column;
+}
+
+.actionItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  font-size: 14px;
+  color: $text;
+  text-align: left;
+  width: 100%;
+  transition: background 0.1s;
+
+  &:hover {
+    background: rgba(33,63,125,0.04);
+    color: $primary;
+  }
+}

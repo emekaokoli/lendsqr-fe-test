@@ -1,0 +1,12 @@
+/// <reference types="vite/client" />
+/// <reference types="vite-plugin-svgr/client" />
+declare module '*.module.scss' {
+  const classes: { readonly [key: string]: string };
+  export default classes;
+}
+
+declare module '*.scss' {
+  const content: string;
+  export default content;
+}
+

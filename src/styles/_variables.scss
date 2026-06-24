@@ -1,0 +1,41 @@
+// Colors
+$primary: #213F7D;
+$primary-light: #39CDCC;
+$text: #545F7D;
+$text-dark: #213F7D;
+$text-muted: #545F7D;
+$border: #E5E7EB;
+$border-light: #F5F5F5;
+$bg: #FBFBFB;
+$white: #FFFFFF;
+
+// Status colors
+$status-active-bg: #F3FCF6;
+$status-active-text: #0B7027;
+$status-inactive-bg: #F5F5F7;
+$status-inactive-text: #545F7D;
+$status-pending-bg: #FEF5EC;
+$status-pending-text: #996300;
+$status-blacklisted-bg: #FDE8EC;
+$status-blacklisted-text: #C40033;
+
+// Typography
+$font: 'Work Sans', sans-serif;
+
+// Spacing
+$sidebar-width: 283px;
+$header-height: 100px;
+
+// Breakpoints (max-width, desktop-first)
+$mobile-sm: 480px;
+$mobile: 640px;
+$tablet: 1024px;
+
+// Border radius
+$radius-sm: 4px;
+$radius: 8px;
+$radius-lg: 12px;
+
+// Shadows
+$shadow: 0px 4px 20px rgba(0, 0, 0, 0.08);
+$shadow-card: 3px 5px 20px rgba(0, 0, 0, 0.04);

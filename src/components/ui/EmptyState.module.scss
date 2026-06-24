@@ -1,0 +1,41 @@
+@use '@/styles/variables' as *;
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 24px;
+  text-align: center;
+
+  @media (max-width: $mobile) {
+    padding: 48px 16px;
+  }
+}
+
+.icon {
+  width: 80px;
+  height: 80px;
+  background: rgba(33, 63, 125, 0.06);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 600;
+  color: $primary;
+  margin-bottom: 8px;
+
+  @media (max-width: $mobile) {
+    font-size: 18px;
+  }
+}
+
+.desc {
+  font-size: 14px;
+  color: $text-muted;
+}

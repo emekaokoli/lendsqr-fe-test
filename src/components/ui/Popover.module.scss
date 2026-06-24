@@ -1,0 +1,22 @@
+@use '@/styles/variables' as *;
+
+.trigger {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+}
+
+.content {
+  position: absolute;
+  z-index: 9999;
+  background: $white;
+  border: 1px solid $border;
+  border-radius: $radius;
+  box-shadow: $shadow;
+  min-width: 180px;
+  padding: 8px 0;
+
+  &.right {
+    transform: translateX(-100%);
+  }
+}

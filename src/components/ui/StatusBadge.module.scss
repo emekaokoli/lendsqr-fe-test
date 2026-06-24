@@ -1,0 +1,32 @@
+@use '@/styles/variables' as *;
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 14px;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.active {
+  background: $status-active-bg;
+  color: $status-active-text;
+}
+
+.inactive {
+  background: $status-inactive-bg;
+  color: $status-inactive-text;
+}
+
+.pending {
+  background: $status-pending-bg;
+  color: $status-pending-text;
+}
+
+.blacklisted {
+  background: $status-blacklisted-bg;
+  color: $status-blacklisted-text;
+}

@@ -1,0 +1,304 @@
+@use '@/styles/variables' as *;
+
+.page {
+  // padding handled by DashboardLayout main
+}
+
+.backBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  color: $text;
+  margin-bottom: 32px;
+  transition: color 0.15s;
+
+  &:hover { color: $primary; }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 500;
+  color: $primary;
+
+  @media (max-width: $mobile) {
+    font-size: 20px;
+  }
+}
+
+.headerActions {
+  display: flex;
+  gap: 16px;
+}
+
+.blacklistBtn {
+  padding: 12px 24px;
+  border: 1px solid $status-blacklisted-text;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: $status-blacklisted-text;
+  background: transparent;
+  letter-spacing: 0.05em;
+  transition: all 0.15s;
+
+  &:hover { background: rgba(228, 3, 59, 0.05); }
+}
+
+.activateBtn {
+  padding: 12px 24px;
+  border: 1px solid $primary-light;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: $primary-light;
+  background: transparent;
+  letter-spacing: 0.05em;
+  transition: all 0.15s;
+
+  &:hover { background: rgba(57, 205, 204, 0.05); }
+}
+
+.summaryCard {
+  background: $white;
+  border: 1px solid $border;
+  border-radius: $radius;
+  margin-bottom: 24px;
+  box-shadow: $shadow-card;
+  overflow: hidden;
+}
+
+.summaryTop {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  padding: 36px 30px 28px;
+  flex-wrap: wrap;
+
+  @media (max-width: $tablet) {
+    padding: 24px 20px 20px;
+    gap: 24px;
+  }
+
+  @media (max-width: $mobile) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px 16px 16px;
+  }
+}
+
+.avatarSection {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: #D9D9D9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  font-weight: 600;
+  color: $primary;
+  flex-shrink: 0;
+
+  @media (max-width: $mobile) {
+    width: 72px;
+    height: 72px;
+    font-size: 28px;
+  }
+}
+
+.userName {
+  font-size: 22px;
+  font-weight: 500;
+  color: $primary;
+
+  @media (max-width: $mobile) {
+    font-size: 18px;
+  }
+}
+
+.userId {
+  font-size: 14px;
+  color: $text;
+  margin-top: 4px;
+}
+
+.divider {
+  width: 1px;
+  height: 80px;
+  background: rgba(84,95,125,0.2);
+  flex-shrink: 0;
+
+  @media (max-width: $mobile) { display: none; }
+}
+
+.tierSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tierLabel {
+  font-size: 14px;
+  color: $text;
+}
+
+.stars {
+  display: flex;
+  gap: 4px;
+}
+
+.balanceSection {}
+
+.balance {
+  font-size: 22px;
+  font-weight: 600;
+  color: $primary;
+
+  @media (max-width: $mobile) {
+    font-size: 18px;
+  }
+}
+
+.bankAccount {
+  font-size: 12px;
+  color: $text;
+  margin-top: 4px;
+}
+
+// Tabs
+.tabs {
+  display: flex;
+  border-top: 1px solid $border;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+
+  &::-webkit-scrollbar { display: none; }
+}
+
+.tab {
+  padding: 18px 24px;
+  font-size: 14px;
+  font-weight: 500;
+  color: $text;
+  white-space: nowrap;
+  border-bottom: 3px solid transparent;
+  transition: all 0.15s;
+
+  &:hover { color: $primary; }
+
+  &.activeTab {
+    color: $primary;
+    border-bottom-color: $primary-light;
+  }
+}
+
+// Detail card
+.detailCard {
+  background: $white;
+  border: 1px solid $border;
+  border-radius: $radius;
+  box-shadow: $shadow-card;
+}
+
+.sections {
+  padding: 30px;
+
+  @media (max-width: $mobile) {
+    padding: 20px 16px;
+  }
+}
+
+.section {
+  padding-bottom: 28px;
+  border-bottom: 1px solid $border-light;
+  margin-bottom: 28px;
+
+  &.last {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+}
+
+.sectionTitle {
+  font-size: 16px;
+  font-weight: 500;
+  color: $primary;
+  margin-bottom: 24px;
+}
+
+.infoGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 28px 20px;
+
+  @media (max-width: $tablet) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px 16px;
+  }
+
+  @media (max-width: $mobile) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px 12px;
+  }
+}
+
+.infoItem {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.infoLabel {
+  font-size: 12px;
+  font-weight: 500;
+  color: $text;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  opacity: 0.8;
+}
+
+.infoValue {
+  font-size: 16px;
+  font-weight: 500;
+  color: $primary;
+  word-break: break-all;
+
+  @media (max-width: $mobile) {
+    font-size: 14px;
+  }
+}
+
+.guarantorDivider {
+  height: 1px;
+  background: $border-light;
+  margin: 20px 0;
+}
+
+.emptyTab {
+  padding: 60px 30px;
+  text-align: center;
+  color: $text;
+  font-size: 14px;
+
+  @media (max-width: $mobile) {
+    padding: 40px 16px;
+  }
+}

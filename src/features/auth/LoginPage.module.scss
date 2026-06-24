@@ -1,0 +1,162 @@
+@use '@/styles/variables' as *;
+
+.page {
+  display: flex;
+  min-height: 100vh;
+  background: $white;
+}
+
+.left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  background: $white;
+
+  @media (max-width: $tablet) {
+    display: none;
+  }
+}
+
+.logoArea {
+  margin-bottom: 40px;
+}
+
+.illustration {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    width: 100%;
+    max-width: 440px;
+    height: auto;
+  }
+}
+
+.right {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  background: $white;
+
+  @media (max-width: $tablet) {
+    max-width: 100%;
+    padding: 40px 24px;
+  }
+}
+
+.form {
+  width: 100%;
+  max-width: 400px;
+}
+
+.heading {
+  font-size: 40px;
+  font-weight: 700;
+  color: $primary;
+  margin-bottom: 8px;
+
+  @media (max-width: $mobile) {
+    font-size: 28px;
+  }
+}
+
+.sub {
+  font-size: 18px;
+  color: $text;
+  margin-bottom: 48px;
+
+  @media (max-width: $mobile) {
+    font-size: 16px;
+    margin-bottom: 32px;
+  }
+}
+
+.field {
+  margin-bottom: 24px;
+}
+
+.input {
+  width: 100%;
+  padding: 16px 18px;
+  border: 1px solid rgba(84, 95, 125, 0.35);
+  border-radius: $radius-sm;
+  font-size: 14px;
+  color: $text;
+  outline: none;
+  transition: border 0.15s;
+  background: $white;
+
+  &::placeholder { color: rgba(84,95,125,0.6); }
+  &:focus { border-color: $primary-light; }
+
+  &.inputError { border-color: $status-blacklisted-text; }
+}
+
+.passwordWrap {
+  display: flex;
+  align-items: center;
+  border: 1px solid rgba(84, 95, 125, 0.35);
+  border-radius: $radius-sm;
+  overflow: hidden;
+  transition: border 0.15s;
+
+  &:focus-within { border-color: $primary-light; }
+  &.inputError { border-color: $status-blacklisted-text; }
+}
+
+.passwordInput {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 16px 18px;
+  font-size: 14px;
+  color: $text;
+  background: transparent;
+
+  &::placeholder { color: rgba(84,95,125,0.6); }
+}
+
+.showBtn {
+  padding: 0 16px;
+  font-size: 12px;
+  font-weight: 600;
+  color: $primary-light;
+  letter-spacing: 0.05em;
+}
+
+.forgot {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: $primary-light;
+  letter-spacing: 0.05em;
+  margin-bottom: 32px;
+}
+
+.error {
+  display: block;
+  font-size: 12px;
+  color: $status-blacklisted-text;
+  margin-top: 6px;
+}
+
+.submitBtn {
+  width: 100%;
+  padding: 18px;
+  background: $primary-light;
+  color: $white;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  border-radius: $radius-sm;
+  transition: opacity 0.15s;
+
+  &:hover { opacity: 0.9; }
+  &:disabled { opacity: 0.6; cursor: not-allowed; }
+}

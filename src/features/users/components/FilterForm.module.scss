@@ -1,0 +1,72 @@
+@use '@/styles/variables' as *;
+
+.form {
+  padding: 20px;
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  @media (max-width: $mobile-sm) {
+    width: 240px;
+    padding: 16px;
+  }
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  label {
+    font-size: 12px;
+    font-weight: 500;
+    color: $text;
+  }
+
+  input, select {
+    padding: 10px 14px;
+    border: 1px solid rgba(84, 95, 125, 0.35);
+    border-radius: $radius-sm;
+    font-size: 14px;
+    color: $text;
+    outline: none;
+    background: $white;
+
+    &:focus { border-color: $primary-light; }
+    &::placeholder { color: rgba(84,95,125,0.5); }
+  }
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.resetBtn {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid $primary;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: $primary;
+  background: transparent;
+  transition: all 0.15s;
+
+  &:hover { background: rgba(33,63,125,0.05); }
+}
+
+.filterBtn {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: $white;
+  background: $primary-light;
+  transition: opacity 0.15s;
+
+  &:hover { opacity: 0.9; }
+}
