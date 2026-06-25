@@ -12,7 +12,7 @@ pnpm run preview   # preview production build locally
 pnpm run test      # run tests
 ```
 
-**Login credentials** — any non-empty email + password. The mock auth accepts all input.
+**Login credentials** — Enter any non-empty email + password. The mock auth accepts all input.
 
 ---
 
