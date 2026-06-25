@@ -156,25 +156,6 @@ TanStack Router beforeLoad on the layout route uses useAuthStore.getState() (Zus
 
 ---
 
-## Lighthouse audit
-
-Initial scan of `/users` scored **Accessibility 0.92**, **SEO 0.60**. All issues fixed:
-
-| Audit              | Issue                                                            | Fix                                                 |
-| ------------------ | ---------------------------------------------------------------- | --------------------------------------------------- |
-| `color-contrast`   | Sidebar group labels `rgba(84,95,125,0.7)` on white – ratio 3.23 | Changed to `$text` (#545F7D) – ratio 6.14           |
-| `color-contrast`   | Active badge `#39cd62` on `#f3fcf6` – ratio 1.99                 | `$status-active-text` → `#0B7027` – ratio 5.13      |
-| `color-contrast`   | Pending badge `#e9b200` on `#fef5ec` – ratio 1.79                | `$status-pending-text` → `#996300` – ratio 4.57     |
-| `color-contrast`   | Blacklisted badge `#e4033b` on `#fde8ec` – ratio 4.09            | `$status-blacklisted-text` → `#C40033` – ratio 5.24 |
-| `link-name`        | Logo `<a>` has no accessible name                                | Added `aria-label="Home"`                           |
-| `td-has-header`    | Table `<td>` not associated with `<th>`                          | Added `scope="col"` to every `<th>`                 |
-| `meta-description` | Missing `<meta name="description">`                              | Added to `index.html`                               |
-| `robots-txt`       | `robots.txt` missing / invalid                                   | Created `public/robots.txt` (`Allow: /`)            |
-
-After fixes: **Accessibility 1.00**, **SEO 1.00**, **Best Practices 1.00**.
-
----
-
 ## Responsive breakpoints
 
 | Breakpoint | Behaviour                                        |

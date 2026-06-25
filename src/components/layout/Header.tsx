@@ -37,7 +37,7 @@ export default function Header({ onMenuToggle }: HeaderProps) {
           <div className={styles.avatar}>
             <span>{user?.name?.[0] || 'A'}</span>
           </div>
-          <span className={styles.userName}>{user?.name || 'Adedeji'}</span>
+          <span className={styles.userName}>{user?.name || 'user'}</span>
           <svg width="10" height="6" viewBox="0 0 10 6" fill="none">
             <path d="M1 1l4 4 4-4" stroke="#213F7D" strokeWidth="1.5" strokeLinecap="round"/>
           </svg>

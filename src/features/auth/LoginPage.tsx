@@ -28,7 +28,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className={styles.page}>
+    <main className={styles.page}>
       <div className={styles.left}>
         <div className={styles.logoArea}>
           <Logo />
@@ -80,6 +80,6 @@ export default function LoginPage() {
           </form>
         </div>
       </div>
-    </div>
+    </main>
   );
 }
