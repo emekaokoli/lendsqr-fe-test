@@ -1,17 +1,18 @@
 # Lendsqr Frontend Engineering Assessment
 
-React + Vite admin dashboard built to the Lendsqr Figma prototype specification.
+Typescript, React, Vite admin dashboard built to the Lendsqr Figma prototype specification.
 
 ## Setup
 
 ```bash
-npm install
-npm run dev       # development server at http://localhost:5173
-npm run build     # production build
-npm run preview   # preview production build locally
+pnpm install
+pnpm run dev       # development server at http://localhost:5173
+pnpm run build     # production build
+pnpm run preview   # preview production build locally
+pnpm run test      # run tests
 ```
 
-**Login credentials** — any non-empty email + password. The mock auth accepts all input.
+**Login credentials** — Enter any non-empty email + password. The mock auth accepts all input.
 
 ---
 
@@ -37,7 +38,9 @@ npm run preview   # preview production build locally
 ```
 src
  ┣ api
+ ┃ ┣ mockData.test.ts
  ┃ ┣ mockData.ts
+ ┃ ┣ users.test.ts
  ┃ ┗ users.ts
  ┣ assets
  ┃ ┣ logo.svg
@@ -45,51 +48,72 @@ src
  ┣ components
  ┃ ┣ layout
  ┃ ┃ ┣ DashboardLayout.module.scss
+ ┃ ┃ ┣ DashboardLayout.test.tsx
  ┃ ┃ ┣ DashboardLayout.tsx
  ┃ ┃ ┣ Header.module.scss
+ ┃ ┃ ┣ Header.test.tsx
  ┃ ┃ ┣ Header.tsx
  ┃ ┃ ┣ Sidebar.module.scss
+ ┃ ┃ ┣ Sidebar.test.tsx
  ┃ ┃ ┗ Sidebar.tsx
  ┃ ┗ ui
  ┃ ┃ ┣ EmptyState.module.scss
+ ┃ ┃ ┣ EmptyState.test.tsx
  ┃ ┃ ┣ EmptyState.tsx
  ┃ ┃ ┣ ErrorState.module.scss
+ ┃ ┃ ┣ ErrorState.test.tsx
  ┃ ┃ ┣ ErrorState.tsx
  ┃ ┃ ┣ Popover.module.scss
+ ┃ ┃ ┣ Popover.test.tsx
  ┃ ┃ ┣ Popover.tsx
  ┃ ┃ ┣ Skeleton.module.scss
+ ┃ ┃ ┣ Skeleton.test.tsx
  ┃ ┃ ┣ Skeleton.tsx
  ┃ ┃ ┣ StatusBadge.module.scss
+ ┃ ┃ ┣ StatusBadge.test.tsx
  ┃ ┃ ┗ StatusBadge.tsx
  ┣ features
  ┃ ┣ auth
  ┃ ┃ ┣ LoginPage.module.scss
+ ┃ ┃ ┣ LoginPage.test.tsx
  ┃ ┃ ┗ LoginPage.tsx
  ┃ ┗ users
  ┃ ┃ ┣ components
  ┃ ┃ ┃ ┣ FilterForm.module.scss
+ ┃ ┃ ┃ ┣ FilterForm.test.tsx
  ┃ ┃ ┃ ┣ FilterForm.tsx
  ┃ ┃ ┃ ┣ Pagination.module.scss
+ ┃ ┃ ┃ ┣ Pagination.test.tsx
  ┃ ┃ ┃ ┣ Pagination.tsx
  ┃ ┃ ┃ ┣ StatCard.module.scss
+ ┃ ┃ ┃ ┣ StatCard.test.tsx
  ┃ ┃ ┃ ┗ StatCard.tsx
  ┃ ┃ ┣ UserDetailPage.module.scss
+ ┃ ┃ ┣ UserDetailPage.test.tsx
  ┃ ┃ ┣ UserDetailPage.tsx
  ┃ ┃ ┣ UsersPage.module.scss
+ ┃ ┃ ┣ UsersPage.test.tsx
  ┃ ┃ ┗ UsersPage.tsx
  ┣ lib
+ ┃ ┣ storage.test.ts
  ┃ ┗ storage.ts
  ┣ router
+ ┃ ┣ index.test.tsx
  ┃ ┗ index.tsx
  ┣ store
+ ┃ ┣ authStore.test.ts
  ┃ ┗ authStore.ts
  ┣ styles
  ┃ ┣ main.scss
  ┃ ┣ _reset.scss
  ┃ ┗ _variables.scss
+ ┣ test
+ ┃ ┗ setup.ts
  ┣ types
  ┃ ┗ index.ts
+ ┣ App.test.tsx
  ┣ App.tsx
+ ┣ main.test.tsx
  ┣ main.tsx
  ┗ vite-env.d.ts
 ```
@@ -102,7 +126,7 @@ src
 
 500 records paginated at configurable page size (default 100, selectable 10/25/50/100) means the DOM holds at most 100 rows. TanStack Table manualPagination + TanStack Query placeholderData handles page transitions without flicker.
 
-Virtualization adds hard costs: dynamic row heights require measurement passes, scroll restoration becomes manual, keyboard navigation degrades. Breakeven is ~5,000+ rows in a single uninterrupted scroll — not reached here. If the dataset grew beyond server-side pagination capacity (50k+ records in one shot), TanStack Virtual would slot in alongside the existing column/filter definitions with minimal restructuring.
+Virtualization adds hard costs: dynamic row heights require measurement passes, scroll restoration becomes manual, keyboard navigation degrades. Breakeven is ~5,000+ rows in a single uninterrupted scroll — not reached here. If the dataset grew beyond server-side pagination capacity (50k+ records in one shot), TanStack Virtual https://tanstack.com/virtual/latest would slot in alongside the existing column/filter definitions with minimal restructuring.
 
 ### Popover — portal-based
 
@@ -129,25 +153,6 @@ TanStack Router beforeLoad on the layout route uses useAuthStore.getState() (Zus
 | Table error         | ErrorState with retry button calling usersQuery.refetch()     |
 | User detail error   | ErrorState with retry                                         |
 | Unauthenticated     | Redirect to /login via beforeLoad                             |
-
----
-
-## Lighthouse audit
-
-Initial scan of `/users` scored **Accessibility 0.92**, **SEO 0.60**. All issues fixed:
-
-| Audit              | Issue                                                            | Fix                                                 |
-| ------------------ | ---------------------------------------------------------------- | --------------------------------------------------- |
-| `color-contrast`   | Sidebar group labels `rgba(84,95,125,0.7)` on white – ratio 3.23 | Changed to `$text` (#545F7D) – ratio 6.14           |
-| `color-contrast`   | Active badge `#39cd62` on `#f3fcf6` – ratio 1.99                 | `$status-active-text` → `#0B7027` – ratio 5.13      |
-| `color-contrast`   | Pending badge `#e9b200` on `#fef5ec` – ratio 1.79                | `$status-pending-text` → `#996300` – ratio 4.57     |
-| `color-contrast`   | Blacklisted badge `#e4033b` on `#fde8ec` – ratio 4.09            | `$status-blacklisted-text` → `#C40033` – ratio 5.24 |
-| `link-name`        | Logo `<a>` has no accessible name                                | Added `aria-label="Home"`                           |
-| `td-has-header`    | Table `<td>` not associated with `<th>`                          | Added `scope="col"` to every `<th>`                 |
-| `meta-description` | Missing `<meta name="description">`                              | Added to `index.html`                               |
-| `robots-txt`       | `robots.txt` missing / invalid                                   | Created `public/robots.txt` (`Allow: /`)            |
-
-After fixes: **Accessibility 1.00**, **SEO 1.00**, **Best Practices 1.00**.
 
 ---
 
